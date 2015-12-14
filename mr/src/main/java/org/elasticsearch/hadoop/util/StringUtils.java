@@ -414,9 +414,9 @@ public abstract class StringUtils {
 
         // there are two formats - ip:port or [/ip:port]
         // first the ip is normalized
-        if (httpAddr.contains("[")) {
+        if (httpAddr.contains("/")) {
             int startIp = httpAddr.indexOf("/") + 1;
-            int endIp = httpAddr.indexOf("]");
+            int endIp = httpAddr.indexOf("]") > 0 ? httpAddr.indexOf("]") : httpAddr.length();
             if (startIp < 0 || endIp < 0) {
                 throw new EsHadoopIllegalStateException("Cannot parse http address " + httpAddr);
             }
